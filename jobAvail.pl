@@ -7,26 +7,28 @@ WWW::Mechanize::TreeBuilder->meta->apply($mech);
 
 while(TRUE){
 	eval {
+		#NEED TO CHANGE URL
 		$mech->get( 'http://ec2-18-222-64-213.us-east-2.compute.amazonaws.com/printAllBallots/12345678' );
 		
-		#$mech->click_button( id => "myButton");
-		# Find all <h1> tags
-		my @list = $mech->find('pre');
+		#This fills in the form and submits it
+		$mech->submit_form(
+			form_name => 'myForm',
+			fields => {
+				'cx-login-clientid-valid' => '0',
+				'cx-login-username-valid' => 'draden',
+				'cx-login-password-valid' => 'gaffney'
+			},
+		);
 
-
-		# or this way
-		my @list = $mech->look_down('_tag', 'pre');
-		
-		# Now just iterate and process
-		my $filename = 'UnprintedBallots.txt';
-
-		open(FH, '>', $filename) or die $!;
-
-		foreach (@list) {
-		    print FH $_->as_text();
-		    system("py", "python_print_script.py") == 0 or die "Python script returned error $?";
-		}
-		close(FH);
+		$mech->submit_form(
+			form_name => 'searchBar',
+			fields => {
+				'text' => 'Coachella'
+			},
+		);
+		$mech->set_fields('radio_group_name' => 'option');
+		#picks 
+		$mech->submit();
 		sleep 10;
 	};
 	if ($@) {
