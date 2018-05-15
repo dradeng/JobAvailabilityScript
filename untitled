@@ -1,0 +1,15 @@
+<html>
+	<head>
+	</head>
+	<body>
+		<form autocomplete="on" action target="temp_save">
+
+			<input type="text" name="cx-login-clientid-valid" value placeholder="Client ID">
+			<input type="password" name="cx-login-username-valid" value placeholder="Username">
+			<input type="password" name="cx-login-password-valid" value placeholder="Password">
+			<div>
+				<input type="submit" value="Log In">
+			</div>
+		</form>
+	</body>
+</html>

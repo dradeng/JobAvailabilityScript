@@ -1,8 +1,20 @@
 <html>
 	<head>
+		<script>
+			function check()
+			{
+				var a = document.getElementsbyName("cx-login-clientid-valid")
+				var b = document.getElementsbyName("cx-login-username-valid")
+				var c = document.getElementsbyName("cx-login-password-valid")
+				if(a == "0" && b == "Draden" && c == "Gaffney")
+				{
+					window.location = "testSearch.html";
+				}
+			}
+		</script>
 	</head>
 	<body>
-		<form autocomplete="on" action target="temp_save">
+		<form autocomplete="on" onclick="check()">
 
 			<input type="text" name="cx-login-clientid-valid" value placeholder="Client ID">
 			<input type="password" name="cx-login-username-valid" value placeholder="Username">
